@@ -1,0 +1,62 @@
+sandboxie:
+  path: C:\Program Files\Sandboxie\Start.exe
+  default_box: DefaultBox
+
+dota2:
+  steam_path: C:\steam\steam.exe
+  dota_app_id: '570'
+  launch_options:
+  - -novid
+  - -high
+  - -windowed
+  - -w 1600
+  - -h 900
+  - -map dota
+  - -prewarm
+  - -map_reduce_memory
+  - -nojoy
+  - -novr
+  - -nohltv
+  - -softparticledefaultoff
+  - -noaafonts
+  startup_delay: 3
+  window_check_timeout: 180
+
+
+instances:
+- name: Dota2_Instance_1
+  sandbox_name: "1"
+  enabled: true
+  priority: 1
+- name: Dota2_Instance_2
+  sandbox_name: "2"
+  enabled: true
+  priority: 2
+- name: Dota2_Instance_3
+  sandbox_name: "3"
+  enabled: true
+  priority: 3
+- name: Dota2_Instance_4
+  sandbox_name: "4"
+  enabled: true
+  priority: 4
+- name: Dota2_Instance_5
+  sandbox_name: "5"
+  enabled: true
+  priority: 5
+- name: Dota2_Instance_6
+  sandbox_name: "6"
+  enabled: true
+  priority: 6
+- name: Dota2_Instance_7
+  sandbox_name: "7"
+  enabled: true
+  priority: 7
+- name: Dota2_Instance_8
+  sandbox_name: "8"
+  enabled: true
+  priority: 8
+- name: Dota2_Instance_9
+  sandbox_name: "9"
+  enabled: true
+  priority: 9

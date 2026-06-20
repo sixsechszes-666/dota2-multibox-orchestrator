@@ -1,0 +1,27 @@
+# --- Secrets & credentials (NEVER commit) ---
+config/credentials.json
+.env
+
+# --- Runtime / session artifacts ---
+logs/
+config/current_session_*.json
+hwnd_mapping.json
+battle_coords_*.json
+*.log
+
+# --- Third-party binaries ---
+steamcmd/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# --- IDE / OS ---
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db

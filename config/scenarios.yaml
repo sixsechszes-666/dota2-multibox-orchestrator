@@ -1,0 +1,252 @@
+scenarios:
+  startup:
+    - action: check_and_auto_update_sandboxes
+      sandbox_base: "C:\\user"
+      sandboxes: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+      check_interval: 30                # Интервал проверки обновления
+      max_checks: 60                   # Максимум попыток проверки
+      terminate_before_check: true     # Закрывать ВСЕ процессы перед проверкой
+      terminate_after_update: true     # Закрывать ВСЕ процессы после обновления
+      wait_after_terminate: 5         # Ожидание после закрытия процессов
+      wait_after_update: 5           # Ожидание после обновления
+      timeout: 2400                   # 40 минут на весь цикл
+
+    - action: wait_delay
+      delay: 30
+
+    - action: select_random_instances
+      total_sandboxes: 9
+      master_instance: "1"
+      slaves_to_select: 4
+
+    - action: launch_selected_sandbox_instances
+      config_file: "config/sandbox_config.yaml"
+      timeout: 300
+      delay_after: 40
+
+    - action: wait_delay
+      delay: 60
+    - action: sandbox_status
+      timeout: 30
+    - action: clear_current_steam_ids
+    - action: collect_selected_player_ids
+      sandbox_base_path: "C:\\user"
+      sandbox_user: ""
+    - action: create_party_with_selected
+      timeout: 30
+
+    - action: wait_parties_ready
+      timeout: 300
+    - action: join_party
+      party_id: "default_party"
+      check_interval: 10
+
+
+  # Игровой цикл (повторяется 5 раз)
+  game_cycle:
+    - action: wait_parties_ready
+      timeout: 600
+    - action: setup_region_play
+      region: "EAST_EUROPE"
+      timeout: 30
+    - action: synchronized_accept
+      timeout: 3000
+      max_checks: 5
+      check_interval: 1
+      max_attempts: 2000
+    - action: hero_pick_sync
+      timeout: 180
+    - action: check_pick_button
+
+    - action: check_reconnect
+      confidence: 0.8
+
+    - action: team_check
+      timeout: 300
+    - action: chat_game_start
+    - action: random_consumables
+    - action: buy_random_boots
+      timeout: 30
+
+    - action: check_reconnect
+      confidence: 0.8
+
+    - action: ward_placement
+    - action: fight_on_river
+      timeout: 180
+      repeat: 20
+      interval: 0
+      cyclic_duration: 80
+      iteration_start: 1
+    - action: clear_caches
+
+    - action: check_reconnect
+      confidence: 0.8
+
+    - action: buy_random_bracers
+      timeout: 30
+    - action: buy_core_items
+      timeout: 60
+
+    - action: jungle_farm
+      timeout: 120
+      repeat: 20
+      interval: 0
+      cyclic_duration: 20
+
+    - action: chat_game_end
+    - action: winning_strategy
+      timeout: 100
+      repeat: 100
+      interval: 30
+
+    - action: clear_caches
+
+
+  check_and_update:
+    - action: check_and_auto_update_sandboxes
+      sandbox_base: "C:\\user"
+      sandboxes: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+      check_interval: 30                # Интервал проверки обновления
+      max_checks: 60                   # Максимум попыток проверки
+      terminate_before_check: true     # Закрывать ВСЕ процессы перед проверкой
+      terminate_after_update: true     # Закрывать ВСЕ процессы после обновления
+      wait_after_terminate: 5         # Ожидание после закрытия процессов
+      wait_after_update: 5           # Ожидание после обновления
+      timeout: 2400                   # 40 минут на весь цикл
+
+    - action: wait_delay
+      delay: 30
+
+
+  sandbox_test:
+    - action: launch_sandbox_instances
+      config_file: "config/sandbox_config.yaml"
+      timeout: 300
+      delay_after: 90
+    - action: hero_pick_sync
+      timeout: 180
+    - action: check_reconnect
+      confidence: 0.8
+    - action: team_check
+      timeout: 300
+    - action: wait_delay
+      delay: 30
+
+    - action: chat_game_start
+    - action: random_consumables
+    - action: chat_game_end
+    - action: random_chat_wheel
+      chance: 0.3
+    - action: ward_placement
+
+    - action: fight_on_river
+      timeout: 180
+      repeat: 1
+      interval: 0
+      cyclic_duration: 80
+      iteration_start: 1
+    - action: clear_caches
+
+  sandbox_testt:
+    - action: wait_delay
+      delay: 60
+    - action: launch_sandbox_instances
+      config_file: "config/sandbox_config.yaml"
+      timeout: 300
+      delay_after: 90  # Ждем 90 секунд для полной загрузки Dota 2
+    - action: wait_delay
+      delay: 60
+    - action: sandbox_status
+      config_file: "sandbox_config.yaml"
+      timeout: 30
+    - action: create_party_multi
+      party_ids:
+        - "100000001"
+        - "100000002"
+        - "100000003"
+        - "100000004"
+    - action: join_party
+      party_id: "default_party"
+
+  shopping_test:
+    - action: buy_random_boots
+      timeout: 30
+    - action: buy_random_bracers
+      timeout: 30
+    - action: buy_core_items
+      timeout: 60
+    - action: winning_strategy
+      timeout: 180
+      repeat: 100
+      interval: 30
+
+  party_test:
+    - action: synchronized_accept
+      timeout: 3000
+      max_checks: 3
+      check_interval: 1
+      max_attempts: 10  # ← Максимум 10 попыток принятия игры
+
+  party:
+    - action: create_party_multi
+      party_ids:
+        - "100000001"
+        - "100000002"
+        - "100000003"
+        - "100000004"
+    - action: join_party
+      party_id: "default_party"
+
+    - action: wait_parties_ready
+      timeout: 300
+      check_interval: 10
+    - action: setup_region_play
+      region: "DUBAI"  # Можно менять: DUBAI, INDIA, SE_ASIA, BRAZIL, PERU, ARGENTINA
+      timeout: 30
+  test:
+    - action: jungle_farm
+      timeout: 120
+      repeat: 5
+      interval: 35
+    - action: buy_core_items
+      timeout: 60
+    - action: winning_strategy
+      timeout: 100
+      repeat: 100
+      interval: 30
+
+  standard_gamee:
+    - action: hero_pick_sync
+      timeout: 180
+    - action: team_check
+      timeout: 300
+    - action: fight_on_river
+      timeout: 180
+      repeat: 2
+      interval: 80
+      iteration_start: 1
+    - action: jungle_farm
+      timeout: 120
+      repeat: 1
+      interval: 35
+    - action: winning_strategy
+      timeout: 60
+      repeat: 100
+      interval: 30
+
+
+  standard_game:
+    - action: hero_pick_sync
+      timeout: 180
+    - action: team_check
+      timeout: 300
+    - action: fight_on_river
+      timeout: 180
+      repeat: 5
+      interval: 70
+      iteration_start: 1
+    - action: jungle_farm
+      timeout: 120
+      repeat: 20
+      interval: 35

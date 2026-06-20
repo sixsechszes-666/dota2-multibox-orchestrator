@@ -1,0 +1,10 @@
+PyAutoGUI~=0.9.54
+numpy~=1.26.4
+colorlog~=6.9.0
+opencv-python~=4.11.0.86
+pillow~=11.1.0
+PyYAML~=6.0.2
+psutil~=7.0.0
+gspread~=6.2.0
+protobuf~=5.26.1
+pywin32

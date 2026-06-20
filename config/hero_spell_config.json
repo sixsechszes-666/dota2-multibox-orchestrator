@@ -1,0 +1,26 @@
+{
+  "spell_exclusions": {
+    "abbadon": ["e"],
+    "alchemist": ["e"],
+    "axe": ["e"],
+    "centaur": ["e"],
+    "chaos": ["e"],
+    "clockwerk": ["r"],
+    "down": ["e"],
+    "dragon": ["e"],
+    "huskar": ["w"],
+    "juggernaut": ["e"],
+    "kunkka": ["e", "w"],
+    "legion": ["e"],
+    "lifestealer": ["e"],
+    "luna": ["e"],
+    "monkey": ["e"],
+    "slardar": ["e"],
+    "slark": ["w", "e"],
+    "sven": ["w"],
+    "underlord": ["e"],
+    "ursa": ["e"],
+    "vengeful": ["e"],
+    "wraith": ["e"]
+  }
+}
